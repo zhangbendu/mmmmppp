@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 名称空间 
+	要与接口文件的全路径一致
+-->
+<mapper namespace="com.zhiyou100.mapper.UserMapper">
+	<!-- statement的id 要与接口文件的方法名一致 -->
+	<!-- statement的parameterType参数类型 要与接口方法一致  -->
+	<!-- statement的resultType要与接口文件的返回值一致-->
+	<!-- select标签,查询语句 -->
+	<!-- sql语句中的# 理解为 prepareStatement中的? 占位符 -->
+	<select id="findUserById" parameterType="int" resultType="com.zhiyou100.model.User">
+		select * from user where id =
+		#{id}
+	</select>
+	<insert id="insertUser" parameterType="com.zhiyou100.model.User">
+		insert into user(username,birthday,sex,address)
+		values (#{username},#{birthday},#{sex},#{address})
+	</insert>
+	<update id="updateUser" parameterType="com.zhiyou100.model.User">
+	update user set username = #{username},birthday = #{birthday},
+	sex=#{sex},address=#{address} where id = #{id}
+	
+	</update>
+	<delete id="deleteUserById" parameterType="int">
+		delete from user where id = #{id}
+	</delete>
+	<select id="findUserByHashMap" parameterType="HashMap" resultType="com.zhiyou100.model.User">
+		
+	select * from user where id = #{idHM}
+	
+	</select>
+	<select id="findUserByLikeName" parameterType="String" resultType="com.zhiyou100.model.User">
+	select * from user where username like '%${value}%'
+	
+	</select>
+</mapper>
